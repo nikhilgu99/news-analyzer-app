@@ -2,14 +2,69 @@
 
 <head>
     <title>Newsfeed Project</title>
+
+    <style>
+        body {
+            background-color: rgb(200, 200, 200);
+        }
+        
+        #keyDiv {
+            margin-left: 32.5%;
+            background-color: #00a65a;
+            display: inline-block;
+            width: 35%;
+        }
+
+        #prompt1 {
+            color: white;
+            display: inline-block;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        #prompt2 {
+            color: white;
+            display: inline-block;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        #pubDiv {
+            background-color: #f39c12;
+            margin-left: 32.5%;
+            width: 35%;
+        }
+
+        #submit {
+            background-color: #222d32;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            margin-left: 32.5%;
+            padding: 10px 30px;
+            width: 35%;
+        }
+
+        #title {
+            background-color:#3c8dbc;
+            color: rgb(255, 255, 255);
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 10px;
+            text-align: center;
+        }
+        </style>
 </head>
 
 <body>
-    <h1>Newsfeed Lookup Tool</h1>
+    <h1 id="title">Newsfeed Lookup Tool</h1>
     <br>
     <form action = "http://localhost:5000/newsfeed" method = "POST" 
         enctype = "multipart/form-data">
-        <p>Choose a Publisher:</p>
+        
+        <div id="pubDiv">
+        <p id="prompt1">Choose a Publisher:</p>
         <select name="publisher" id="publisher" required>
             <option hidden disabled selected value> -- Choose a Publisher -- </option>
             <option value="abc-news">ABC News</option>
@@ -80,11 +135,14 @@
             <option value="vice-news">Vice News</option>
             <option value="wired">Wired</option>
         </select>
+        </div>
         <br>
-        <p>Enter a keyword:</p>
+        <div id="keyDiv">
+        <p id="prompt2">Enter a keyword:</p>
         <input type="text" name="keyword" id="keyword" required>
+        </div>
         <br><br>
-        <input type="submit"/>
+        <input id="submit" type="submit"/>
     </form>
     <br>
 </body>
