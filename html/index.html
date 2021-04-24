@@ -10,14 +10,76 @@
     <form action = "http://localhost:5000/newsfeed" method = "POST" 
         enctype = "multipart/form-data">
         <p>Choose a Publisher:</p>
-        <input list="publishers" name="publisher" id="publisher" required>
-        <datalist id="publishers">
-            <option value="1">
-            <option value="2">
-            <option value="3">
-            <option value="4">
-            <option value="5">
-        </datalist>
+        <select name="publisher" id="publisher" required>
+            <option hidden disabled selected value> -- Choose a Publisher -- </option>
+            <option value="abc-news">ABC News</option>
+            <option value="ars-technica">Ars Technica</option>
+            <option value="associated-press">Associated Press</option>
+            <option value="axios">Axios</option>
+            <option value="bbc-news">BBC News</option>
+            <option value="bbs-sport">BBC Sport</option>
+            <option value="bleacher-report">Bleacher Report</option>
+            <option value="bloomberg">Bloomberg</option>
+            <option value="breitbart-news">Breitbart News</option>
+            <option value="business-insider">Business Insider</option>
+            <option value="buzzfeed">Buzzfeed</option>
+            <option value="cbc-news">CBC News</option>
+            <option value="cbs-news">CBS News</option>
+            <option value="cnn">CNN</option>
+            <option value="crypto-coins-news">Crypto Coins News</option>
+            <option value="engadget">Engadget</option>
+            <option value="entertainment-weekly">Entertainment Weekly</option>
+            <option value="espn">ESPN</option>
+            <option value="espn-cric-info">ESPN Cric Info</option>
+            <option value="financial-post">Financial Post</option>
+            <option value="fortune">Fortune</option>
+            <option value="four-four-two">FourFourTwo</option>
+            <option value="fox-news">Fox News</option>
+            <option value="fox-sports">Fox Sports</option>
+            <option value="google-news">Google News</option>
+            <option value="hacker-news">Hacker News</option>
+            <option value="ign">IGN</option>
+            <option value="independent">Independent</option>
+            <option value="mashable">Mashable</option>
+            <option value="medical-news-today">Medical News Today</option>
+            <option value="msnbc">MSNBC</option>
+            <option value="mtv-news">MTV News</option>
+            <option value="national-review">National Review</option>
+            <option value="nbc-news">NBC News</option>
+            <option value="new-scientist">New Scientist</option>
+            <option value="newsweek">Newsweek</option>
+            <option value="new-york-magazine">New York Magazine</option>
+            <option value="next-big-future">Next Big Future</option>
+            <option value="nfl-news">NFL News</option>
+            <option value="nhl-news">NHL News</option>
+            <option value="politico">Politico</option>
+            <option value="polygon">Polygon</option>
+            <option value="recode">Recode</option>
+            <option value="reddit-r-all">Reddit</option>
+            <option value="reuters">Reuters</option>
+            <option value="talksport">TalkSport</option>
+            <option value="techcrunch">TechCrunch</option>
+            <option value="techradar">TechRadar</option>
+            <option value="the-american-conservative">The American Conservative</option>
+            <option value="the-globe-and-mail">The Globe and Mail</option>
+            <option value="the-hill">The Hill</option>
+            <option value="the-hindu">The Hindu</option>
+            <option value="the-huffington-post">The Huffington Post</option>
+            <option value="the-irish-times">The Irish Times</option>
+            <option value="the-jerusalem-post">The Jerusalem Post</option>
+            <option value="the-lad-bible">The Lad Bible</option>
+            <option value="the-next-web">The Next Web</option>
+            <option value="the-sport-bible">The Sport Bible</option>
+            <option value="the-times-of-india">The Times of India</option>
+            <option value="the-verge">The Verge</option>
+            <option value="the-wall-street-journal">The Wall Street Journal</option>
+            <option value="the-washington-post">The Washington Post</option>
+            <option value="the-washington-times">The Washington Times</option>
+            <option value="time">Time</option>
+            <option value="usa-today">USA Today</option>
+            <option value="vice-news">Vice News</option>
+            <option value="wired">Wired</option>
+        </select>
         <br>
         <p>Enter a keyword:</p>
         <input type="text" name="keyword" id="keyword" required>
