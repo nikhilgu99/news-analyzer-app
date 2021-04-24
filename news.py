@@ -1,5 +1,6 @@
 # API KEY: 8916674ee011411aae3f5d83992abd18
 import json
+import time
 from urllib.request import urlopen
 
 # IBM Watson NLP libraries
@@ -30,5 +31,6 @@ def getNews(publisher, keyword):
         response = natural_language_understanding.analyze(text=description,features=Features(sentiment=SentimentOptions())).get_result()
         sentiment = response['sentiment']['document']['label'] + ": " + str(response['sentiment']['document']['score'])
         retVal += (title + " SENTIMENT- " + sentiment + "<br>")
+        time.sleep(1) # Necessary to have multiple API calls, o/w IBM rejects all of them
 
     return retVal
