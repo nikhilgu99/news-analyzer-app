@@ -2,8 +2,18 @@
 import json
 from urllib.request import urlopen
 
+# IBM Watson NLP libraries
+from ibm_watson import NaturalLanguageUnderstandingV1
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibm_watson.natural_language_understanding_v1 import Features, CategoriesOptions, EntitiesOptions, SentimentOptions
+
+# NLP Authentication
+authenticator = IAMAuthenticator('edJ96pfFUB2JT949IVN-aLuGIrAs75NLpfHfbw5sBB18')
+natural_language_understanding = NaturalLanguageUnderstandingV1(version='2020-08-01', authenticator=authenticator)
+natural_language_understanding.set_service_url('https://api.us-east.natural-language-understanding.watson.cloud.ibm.com/instances/3528455f-6fa6-4e10-8eb8-1e0cdf7779e0')
+
 def getNews(publisher, keyword):
-    keyword = keyword.replace(" ", "%20")
+    keyword = keyword.replace(" ", "%20") # Make it URL friendly
     url = "https://newsapi.org/v2/everything?sources=" + publisher + "&q=" + keyword + "&apiKey=8916674ee011411aae3f5d83992abd18"
 
     # Get the returned json and pull the info we need
@@ -15,7 +25,10 @@ def getNews(publisher, keyword):
 
     retVal = ""
     for article in fulltext["articles"]:
+        title = article["title"]
         description = article["description"]
-        retVal += (description + "<br>")
+        response = natural_language_understanding.analyze(text=description,features=Features(sentiment=SentimentOptions())).get_result()
+        sentiment = response['sentiment']['document']['label'] + ": " + str(response['sentiment']['document']['score'])
+        retVal += (title + " SENTIMENT- " + sentiment + "<br>")
 
     return retVal
