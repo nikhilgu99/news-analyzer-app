@@ -25,12 +25,23 @@ def getNews(publisher, keyword):
         return "NO ARTICLES FOUND!"
 
     retVal = ""
+    sentiments = []
     for article in fulltext["articles"]:
         title = article["title"]
         description = article["description"]
+
         response = natural_language_understanding.analyze(text=description,features=Features(sentiment=SentimentOptions())).get_result()
-        sentiment = response['sentiment']['document']['label'] + ": " + str(response['sentiment']['document']['score'])
+        sentimentLabel = response['sentiment']['document']['label']
+        sentimentScore = response['sentiment']['document']['score']
+        sentiments.append(sentimentScore)
+        sentiment =  sentimentLabel + ": " + str(sentimentScore)
+
         retVal += (title + " SENTIMENT- " + sentiment + "<br>")
         time.sleep(1) # Necessary to have multiple API calls, o/w IBM rejects all of them
 
+    sentimentAverage = sum(sentiments) / len(sentiments)
+    if sentimentAverage > 0.0:
+        retVal += ("<br> OVERALL SENTIMENT ANALYSIS: Positive- " + str(sentimentAverage))
+    else:
+        retVal += ("<br> OVERALL SENTIMENT ANALYSIS: Negative- " + str(sentimentAverage))
     return retVal
