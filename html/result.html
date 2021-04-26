@@ -1,15 +1,28 @@
 <html>
 
 <head>
-    <title>Newsfeed Project</title>
+    <title>Newsfeed Results</title>
 
     <style>
         a {
             text-decoration: none;
+            color: black;
         }
 
         body {
             background-color: rgb(200, 200, 200);
+        }
+
+        #os {
+            color: firebrick;
+            background-color: rgb(226, 223, 223);
+            border: 1px solid firebrick;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            margin-left: 25%;
+            padding: 10px;
+            text-align: center;
+            width: 50%;
         }
 
         #results{
@@ -35,7 +48,7 @@
 
         #title {
             background-color:#3c8dbc;
-            color: rgb(255, 255, 255);
+            color: white;
             font-family: Arial, Helvetica, sans-serif;
             padding: 10px;
             text-align: center;
@@ -58,5 +71,7 @@
         </tr>
         {% endfor %}
      </table>
+
+     <p id="os">{{ os }}</p>
 </body>
 </html>

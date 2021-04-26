@@ -43,8 +43,10 @@ def getNews(publisher, keyword):
 
     sentimentAverage = sum(sentiments) / len(sentiments)
     
-#    if sentimentAverage > 0.0:
-#        retVal += ("<br> OVERALL SENTIMENT ANALYSIS: Positive- " + str(sentimentAverage))
-#    else:
-#        retVal += ("<br> OVERALL SENTIMENT ANALYSIS: Negative- " + str(sentimentAverage))
-    return results
+    os = "" # Overall Sentiment
+    if sentimentAverage > 0.0:
+        os = ("Overall Sentiment: Positive (" + str(sentimentAverage) + ")")
+    elif sentimentAverage < 0.0:
+        os = ("Overall Sentiment: Negative (" + str(sentimentAverage) + ")")
+
+    return [results, os]
