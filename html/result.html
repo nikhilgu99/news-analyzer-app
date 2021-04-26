@@ -63,11 +63,15 @@
         <tr>
             <th>Article Title</th>
             <th>Sentiment</th>
+            <th>Author</th>
+            <th>Date</th>        
         </tr>
         {% for key, value in results.items() %}
         <tr>
            <td><a href="{{ value[0] }}" target="_blank">{{ key }}</a></td>
            <td>{{ value[1] }}</td>
+           <td>{{ value[2] }}</td>  
+           <td>{{ value[3] }}</td>        
         </tr>
         {% endfor %}
      </table>
