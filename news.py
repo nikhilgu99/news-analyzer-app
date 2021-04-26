@@ -30,7 +30,8 @@ def getNews(publisher, keyword):
         title = article["title"]
         description = article["description"]
         url = article["url"]
-
+        author = article["author"]
+        date = article["publishedAt"]        
         response = natural_language_understanding.analyze(text=description,features=Features(sentiment=SentimentOptions())).get_result()
         
         sentimentLabel = response['sentiment']['document']['label']
@@ -38,7 +39,7 @@ def getNews(publisher, keyword):
         sentiments.append(sentimentScore)
         sentiment =  sentimentLabel + ": " + str(sentimentScore)
 
-        results[title] = [url, sentiment] # Add dictionary entry
+        results[title] = [url, sentiment, author, date] # Add dictionary entry
         time.sleep(1) # Necessary to have multiple API calls, o/w IBM rejects all of them
 
     sentimentAverage = sum(sentiments) / len(sentiments)
