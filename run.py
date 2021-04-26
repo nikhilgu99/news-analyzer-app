@@ -14,7 +14,8 @@ def newsfeed():
     if request.method == 'POST':
         publisher = request.form['publisher']
         keyword = request.form['keyword']
-        return nf.getNews(publisher, keyword) # Call the API and get articles
+        results = nf.getNews(publisher, keyword) # Call the API and get articles
+        return render_template('result.html', results=results)
     else: # GET request, do nothing here
         return "Go back to the home page to search for articles!"
 

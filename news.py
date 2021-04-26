@@ -24,24 +24,27 @@ def getNews(publisher, keyword):
     if fulltext["totalResults"] == 0:
         return "NO ARTICLES FOUND!"
 
-    retVal = ""
-    sentiments = []
+    sentiments = [] # For calculating the average overall sentiment
+    results = {} # Dictionary to return to POST for fancy formatting
     for article in fulltext["articles"]:
         title = article["title"]
         description = article["description"]
+        url = article["url"]
 
         response = natural_language_understanding.analyze(text=description,features=Features(sentiment=SentimentOptions())).get_result()
+        
         sentimentLabel = response['sentiment']['document']['label']
         sentimentScore = response['sentiment']['document']['score']
         sentiments.append(sentimentScore)
         sentiment =  sentimentLabel + ": " + str(sentimentScore)
 
-        retVal += (title + " SENTIMENT- " + sentiment + "<br>")
+        results[title] = [url, sentiment] # Add dictionary entry
         time.sleep(1) # Necessary to have multiple API calls, o/w IBM rejects all of them
 
     sentimentAverage = sum(sentiments) / len(sentiments)
-    if sentimentAverage > 0.0:
-        retVal += ("<br> OVERALL SENTIMENT ANALYSIS: Positive- " + str(sentimentAverage))
-    else:
-        retVal += ("<br> OVERALL SENTIMENT ANALYSIS: Negative- " + str(sentimentAverage))
-    return retVal
+    
+#    if sentimentAverage > 0.0:
+#        retVal += ("<br> OVERALL SENTIMENT ANALYSIS: Positive- " + str(sentimentAverage))
+#    else:
+#        retVal += ("<br> OVERALL SENTIMENT ANALYSIS: Negative- " + str(sentimentAverage))
+    return results
