@@ -71,7 +71,7 @@
            <td><a href="{{ value[0] }}" target="_blank">{{ key }}</a></td>
            <td>{{ value[1] }}</td>
            <td>{{ value[2] }}</td>  
-           <td>{{ value[3] }}</td>        
+           <td>{{ value[3][:10] }}</td>        
         </tr>
         {% endfor %}
      </table>

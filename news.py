@@ -42,7 +42,7 @@ def getNews(publisher, keyword):
         results[title] = [url, sentiment, author, date] # Add dictionary entry
         time.sleep(1) # Necessary to have multiple API calls, o/w IBM rejects all of them
 
-    sentimentAverage = sum(sentiments) / len(sentiments)
+    sentimentAverage = round(sum(sentiments) / len(sentiments), 5)
     
     os = "" # Overall Sentiment
     if sentimentAverage > 0.0:
