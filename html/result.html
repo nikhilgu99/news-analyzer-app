@@ -137,19 +137,20 @@
                 var articleInfo = []; // Array of article info to be added to CSV file
                 for (var j = 0, col; col = row.cells[j]; j++){
                     if(j == 1){ // Looking at second column to get the title and URL
-                        articleInfo.push(col.innerText); // Add article title to array
-                        articleInfo.push(col.innerHTML.split("\"")[1]); // Add article URL to array
+                        var articleTitle = col.innerText;
+                        articleInfo.push(articleTitle.replace(",", "\",\"")); // Add article title, fix for commas
+                        articleInfo.push(col.innerHTML.split("\"")[1]); // Add article URL
                     }else if(j == 2){ // Get the article sentiment
                         articleInfo.push(col.innerText); 
                     }else if(j == 3){ // Get the article author
-                        articleInfo.push(col.innerText); 
+                        var articleAuthor = col.innerText;
+                        articleInfo.push(articleAuthor.replace(",", "\",\""));
                     }else if(j == 4){ // Get the article date
                         articleInfo.push(col.innerText);
                     }
                 }
                 articlesToExport.push(articleInfo);
             }
-            console.log(articlesToExport);
             download_csv(articlesToExport);
         }
 
@@ -171,7 +172,8 @@
                         }
                     }else if(j == 1){ // Looking at second column to get the title and URL
                         if(isValid){
-                            articleInfo.push(col.innerText); // Add article title to array
+                            var articleTitle = col.innerText;
+                            articleInfo.push(articleTitle.replace(",", "\",\"")); // Add article title, fix for commas
                             articleInfo.push(col.innerHTML.split("\"")[1]); // Add article URL to array
                         }
                     }else if(j == 2){ // Get the article sentiment
@@ -180,7 +182,8 @@
                         }
                     }else if(j == 3){ // Get the article author
                         if(isValid){
-                            articleInfo.push(col.innerText); 
+                            var articleAuthor = col.innerText;
+                            articleInfo.push(articleAuthor.replace(",", "\",\""));
                         }
                     }else if(j == 4){ // Get the article date
                         if(isValid){
