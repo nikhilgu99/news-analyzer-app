@@ -127,24 +127,23 @@
     <script>
 
         function exportAll(){
-            var articlesToExport = [];
+            var articlesToExport = []; // 2D array of articles information
 
             var table = document.getElementById("results");
-            for (var i = 0, row; row = table.rows[i]; i++){
-                if(i == 0){ // Avoid possible errors with the title row
-                    continue;
-                }
+            for (var i = 1, row; row = table.rows[i]; i++){
+
                 var articleInfo = []; // Array of article info to be added to CSV file
+
                 for (var j = 0, col; col = row.cells[j]; j++){
                     if(j == 1){ // Looking at second column to get the title and URL
                         var articleTitle = col.innerText;
-                        articleInfo.push(articleTitle.replace(",", "\",\"")); // Add article title, fix for commas
+                        articleInfo.push(articleTitle.replace(/,/g, "\",\"")); // Add article title, fix for commas
                         articleInfo.push(col.innerHTML.split("\"")[1]); // Add article URL
                     }else if(j == 2){ // Get the article sentiment
                         articleInfo.push(col.innerText); 
                     }else if(j == 3){ // Get the article author
                         var articleAuthor = col.innerText;
-                        articleInfo.push(articleAuthor.replace(",", "\",\""));
+                        articleInfo.push(articleAuthor.replace(/,/g, "\",\""));
                     }else if(j == 4){ // Get the article date
                         articleInfo.push(col.innerText);
                     }
@@ -155,15 +154,14 @@
         }
 
         function exportSaved(){
-            var articlesToExport = [];
+            var articlesToExport = []; // 2D array of articles information
             var isValid = false; // Variable to check if row was saved
 
             var table = document.getElementById("results");
-            for (var i = 0, row; row = table.rows[i]; i++){
-                if(i == 0){ // Avoid possible errors with the title row
-                    continue;
-                }
+            for (var i = 1, row; row = table.rows[i]; i++){
+
                 var articleInfo = []; // Array of article info to add to CSV file
+
                 for (var j = 0, col; col = row.cells[j]; j++){
                     if(j == 0){ // Looking at the first column to see if heart is checked
                         var heartText = col.innerHTML;
@@ -173,7 +171,7 @@
                     }else if(j == 1){ // Looking at second column to get the title and URL
                         if(isValid){
                             var articleTitle = col.innerText;
-                            articleInfo.push(articleTitle.replace(",", "\",\"")); // Add article title, fix for commas
+                            articleInfo.push(articleTitle.replace(/,/g, "\",\"")); // Add article title, fix for commas
                             articleInfo.push(col.innerHTML.split("\"")[1]); // Add article URL to array
                         }
                     }else if(j == 2){ // Get the article sentiment
@@ -183,7 +181,7 @@
                     }else if(j == 3){ // Get the article author
                         if(isValid){
                             var articleAuthor = col.innerText;
-                            articleInfo.push(articleAuthor.replace(",", "\",\""));
+                            articleInfo.push(articleAuthor.replace(/,/g, "\",\""));
                         }
                     }else if(j == 4){ // Get the article date
                         if(isValid){
@@ -194,8 +192,11 @@
                     }
                 }
             }
-            console.log(articlesToExport);
-            download_csv(articlesToExport);
+            if(articlesToExport.length == 0){
+                alert("No articles selected.");
+            }else{
+                download_csv(articlesToExport);
+            }
         }
 
         function download_csv(data) {
@@ -205,7 +206,7 @@
                     csv += "\n";
             });
         
-            var hiddenElement = document.createElement('a');
+            var hiddenElement = document.createElement('a'); // Workaround for max compatability
             hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
             hiddenElement.target = '_blank';
             hiddenElement.download = 'articles.csv';
