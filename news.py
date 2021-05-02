@@ -24,6 +24,7 @@ def getNews(publisher, keyword):
     if fulltext["totalResults"] == 0:
         return "NO ARTICLES FOUND!"
 
+    counter = 0 # Used in HTML for helping with favouriate feature
     sentiments = [] # For calculating the average overall sentiment
     results = {} # Dictionary to return to POST for fancy formatting
     for article in fulltext["articles"]:
@@ -39,7 +40,8 @@ def getNews(publisher, keyword):
         sentiments.append(sentimentScore)
         sentiment =  sentimentLabel + ": " + str(sentimentScore)
 
-        results[title] = [url, sentiment, author, date] # Add dictionary entry
+        results[title] = [url, sentiment, author, date, counter] # Add dictionary entry
+        counter += 1
         time.sleep(0.5) # Necessary to have multiple API calls, o/w IBM rejects all of them
 
     sentimentAverage = round(sum(sentiments) / len(sentiments), 5)

@@ -13,13 +13,53 @@
             background-color: rgb(200, 200, 200);
         }
 
+        img {
+            padding: 5px;
+            width: 24px;
+        }
+        td img{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }  
+
+        #exportAll {
+            background-color: rgb(226, 223, 223);
+            border: 2px solid gray;
+            border-radius: 6px;
+            color: #3c8dbc;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: bold;
+            margin-left: 13.77%;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            width: 10%;
+        }
+
+        #exportSaved {
+            background-color: rgb(226, 223, 223);
+            border: 2px solid gray;
+            border-radius: 6px;
+            color: #3c8dbc;
+            cursor: pointer;
+            display: inline-block;
+            font-weight: bold;
+            margin-right: 13.77%;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            width: 10%;
+        }
+
         #os {
             color: firebrick;
             background-color: rgb(226, 223, 223);
             border: 1px solid firebrick;
+            display: inline-block;
             font-family: Arial, Helvetica, sans-serif;
             font-weight: bold;
-            margin-left: 25%;
             padding: 10px;
             text-align: center;
             width: 50%;
@@ -53,7 +93,7 @@
             padding: 10px;
             text-align: center;
         }
-        </style>
+    </style>
 </head>
 
 <body>
@@ -61,21 +101,121 @@
     
     <table border=1 id="results">
         <tr>
+            <th>Save</th>
             <th>Article Title</th>
-            <th>Sentiment</th>
+            <th style="width: 10%;">Sentiment</th>
             <th>Author</th>
-            <th>Date</th>        
+            <th style="width: 8%;">Date</th>        
         </tr>
         {% for key, value in results.items() %}
         <tr>
-           <td><a href="{{ value[0] }}" target="_blank">{{ key }}</a></td>
-           <td>{{ value[1] }}</td>
-           <td>{{ value[2] }}</td>  
-           <td>{{ value[3][:10] }}</td>        
+            <td><img id="{{ value[4] }}" src="/static/heart_off.png" onclick="favourite('{{ value[4] }}')"></td>
+            <td><a href="{{ value[0] }}" target="_blank">{{ key }}</a></td>
+            <td>{{ value[1] }}</td>
+            <td>{{ value[2] }}</td>  
+            <td>{{ value[3][:10] }}</td>        
         </tr>
         {% endfor %}
-     </table>
+    </table>
 
-     <p id="os">{{ os }}</p>
+    <div id="bottomBlock">
+        <button id="exportSaved" type="button" onclick="exportSaved()">Export Saved</button>
+        <p id="os">{{ os }}</p>
+        <button id="exportAll" type="button" onclick="exportAll()">Export All</button>
+    </div>
+
+    <script>
+
+        function exportAll(){
+            var articlesToExport = [];
+
+            var table = document.getElementById("results");
+            for (var i = 0, row; row = table.rows[i]; i++){
+                if(i == 0){ // Avoid possible errors with the title row
+                    continue;
+                }
+                var articleInfo = []; // Array of article info to be added to CSV file
+                for (var j = 0, col; col = row.cells[j]; j++){
+                    if(j == 1){ // Looking at second column to get the title and URL
+                        articleInfo.push(col.innerText); // Add article title to array
+                        articleInfo.push(col.innerHTML.split("\"")[1]); // Add article URL to array
+                    }else if(j == 2){ // Get the article sentiment
+                        articleInfo.push(col.innerText); 
+                    }else if(j == 3){ // Get the article author
+                        articleInfo.push(col.innerText); 
+                    }else if(j == 4){ // Get the article date
+                        articleInfo.push(col.innerText);
+                    }
+                }
+                articlesToExport.push(articleInfo);
+            }
+            console.log(articlesToExport);
+            download_csv(articlesToExport);
+        }
+
+        function exportSaved(){
+            var articlesToExport = [];
+            var isValid = false; // Variable to check if row was saved
+
+            var table = document.getElementById("results");
+            for (var i = 0, row; row = table.rows[i]; i++){
+                if(i == 0){ // Avoid possible errors with the title row
+                    continue;
+                }
+                var articleInfo = []; // Array of article info to add to CSV file
+                for (var j = 0, col; col = row.cells[j]; j++){
+                    if(j == 0){ // Looking at the first column to see if heart is checked
+                        var heartText = col.innerHTML;
+                        if(heartText.includes("heart_on.png")){  // Check image source
+                            isValid = true;
+                        }
+                    }else if(j == 1){ // Looking at second column to get the title and URL
+                        if(isValid){
+                            articleInfo.push(col.innerText); // Add article title to array
+                            articleInfo.push(col.innerHTML.split("\"")[1]); // Add article URL to array
+                        }
+                    }else if(j == 2){ // Get the article sentiment
+                        if(isValid){
+                            articleInfo.push(col.innerText); 
+                        }
+                    }else if(j == 3){ // Get the article author
+                        if(isValid){
+                            articleInfo.push(col.innerText); 
+                        }
+                    }else if(j == 4){ // Get the article date
+                        if(isValid){
+                            articleInfo.push(col.innerText);
+                            articlesToExport.push(articleInfo); 
+                        }
+                        isValid = false; // Rest the variable for the next row
+                    }
+                }
+            }
+            console.log(articlesToExport);
+            download_csv(articlesToExport);
+        }
+
+        function download_csv(data) {
+            var csv = 'Title,URL,Sentiment,Author,Date\n';
+            data.forEach(function(row) {
+                    csv += row.join(',');
+                    csv += "\n";
+            });
+        
+            var hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+            hiddenElement.target = '_blank';
+            hiddenElement.download = 'articles.csv';
+            hiddenElement.click();
+        }
+
+        function favourite(id){
+            if(document.getElementById(id).src.includes("heart_off")){
+                document.getElementById(id).src = "{{url_for('static', filename='heart_on.png')}}";
+            }else{
+                document.getElementById(id).src = "{{url_for('static', filename='heart_off.png')}}";
+            }
+        }
+    </script>
 </body>
 </html>
