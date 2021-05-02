@@ -42,6 +42,12 @@
             width: 35%;
         }
 
+        #spinner {
+            display: none;
+            margin-left: 45%;
+            width: 10%;
+        }
+
         #submit {
             background-color: #222d32;
             color: white;
@@ -147,8 +153,15 @@
         <input type="text" name="keyword" id="keyword" required>
         </div>
         <br><br>
-        <input id="submit" type="submit"/>
+        <input id="submit" type="submit" onclick="load()"/>
     </form>
     <br>
+    <img id="spinner" src="/static/spinner.gif">
+
+    <script>
+        function load(){
+            document.getElementById("spinner").style.display = "block";
+        }
+    </script>
 </body>
 </html>

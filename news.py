@@ -22,7 +22,7 @@ def getNews(publisher, keyword):
     fulltext = json.loads(jsonurl.read())
 
     if fulltext["totalResults"] == 0:
-        return "NO ARTICLES FOUND!"
+        return "none"
 
     counter = 0 # Used in HTML for helping with favouriate feature
     sentiments = [] # For calculating the average overall sentiment
