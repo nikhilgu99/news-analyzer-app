@@ -15,7 +15,7 @@ def newsfeed():
         publisher = request.form['publisher']
         keyword = request.form['keyword']
         results = nf.getNews(publisher, keyword) # Call the API and get articles
-        if results is "none":
+        if results == "none":
             return "No articles found!"
         else:
             return render_template('result.html', results=results[0], os=results[1])
