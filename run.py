@@ -22,4 +22,4 @@ def newsfeed():
     else: # GET request, do nothing here
         return "Go back to the home page to search for articles!"
 
-app.run()
+app.run(host="0.0.0.0", port=5000)
