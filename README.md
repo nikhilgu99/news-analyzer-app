@@ -7,15 +7,15 @@ On the home page, there is a dropdown list of available news sources, and a keyw
 
 *Home Page*
 
-<img alt="Home Page" src="../../static/demo/home.png">
+<img alt="Home Page" src="/static/demo/home.png">
 
 On the results page, a table of all found articles is displayed with their Title, Sentiment, Author, Date.
 Under the table is the overall sentiment of the articles, and the options to export either specific or all articles in a CSV format.
 
 *Results Page*
 
-<img alt="Results Page" src="../../static/demo/results.png">
+<img alt="Results Page" src="/static/demo/results.png">
 
 *CSV File*
 
-<img alt="CSV File" src="../../static/demo/csv.png">
+<img alt="CSV File" src="/static/demo/csv.png">
