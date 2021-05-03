@@ -1,3 +1,4 @@
+
 # News Analyzer App
 BU EC500 Final Project
 
@@ -19,3 +20,10 @@ Under the table is the overall sentiment of the articles, and the options to exp
 *CSV File*
 
 <img alt="CSV File" src="/static/demo/csv.png">
+
+
+
+This is a link to the google drive:
+https://drive.google.com/drive/folders/1vT7lz83J0rFsqHTKhQqH-7tFVfeHOAhN?usp=sharing
+
+There are two videos, one showing if there are no articles for a searched keyword, and one showing the results from a random keyword "bitcoin"
