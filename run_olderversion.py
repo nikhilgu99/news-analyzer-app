@@ -1,13 +1,9 @@
 #This is the older version of the run file
 #This final version of the run file is "run.py"
-
 import os
 from flask import Flask, flash, request, redirect, url_for, render_template
 import news as nf
 app = Flask(__name__)
-
-
-
 
 @app.route("/", methods=['GET'])
 def home(): # Home page for project 
