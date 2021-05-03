@@ -3,6 +3,7 @@ from flask import Flask, flash, request, redirect, url_for, render_template
 import news as nf
 #app = flask.Flask(__name__, template_folder="html")
 #app.config["DEBUG"] = True
+# This is an older version of the run file.
 app = Flask(__name__)
 
 
