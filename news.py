@@ -51,5 +51,7 @@ def getNews(publisher, keyword):
         os = ("Overall Sentiment: POSITIVE (" + str(sentimentAverage) + ")")
     elif sentimentAverage < 0.0:
         os = ("Overall Sentiment: NEGATIVE (" + str(sentimentAverage) + ")")
+    else:
+        os = ("Overall Sentiment: NEUTRAL (0)")
 
     return [results, os]

@@ -160,7 +160,12 @@
 
     <script>
         function load(){
-            document.getElementById("spinner").style.display = "block";
+            if(document.getElementById("publisher").value == "" ||
+             document.getElementById("keyword").value == ""){
+                 // do nothing, we don't want the loading icon showing up here
+             }else{
+                document.getElementById("spinner").style.display = "block";
+             }
         }
     </script>
 </body>
