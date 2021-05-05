@@ -15,7 +15,12 @@ natural_language_understanding.set_service_url('https://api.us-east.natural-lang
 
 def getNews(publisher, keyword):
     keyword = keyword.replace(" ", "%20") # Make it URL friendly
-    url = "https://newsapi.org/v2/everything?sources=" + publisher + "&q=" + keyword + "&apiKey=8916674ee011411aae3f5d83992abd18"
+
+    url = ""
+    if publisher == "all":
+        url = "https://newsapi.org/v2/everything?q=" + keyword + "&sortBy=publishedAt&apiKey=8916674ee011411aae3f5d83992abd18"
+    else:
+        url = "https://newsapi.org/v2/everything?sources=" + publisher + "&q=" + keyword + "&sortBy=publishedAt&apiKey=8916674ee011411aae3f5d83992abd18"
 
     # Get the returned json and pull the info we need
     jsonurl = urlopen(url) 
