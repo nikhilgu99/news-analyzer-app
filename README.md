@@ -1,6 +1,8 @@
 # News Analyzer App
 BU EC500 Final Project
 
+*Video Demo:* [Link](https://drive.google.com/file/d/1GvZkx-SUlZNe1gPkWl_vsfVFBVGSCgmQ/view?usp=sharing)
+
 Flask web application to lookup keyword related news articles from various publishers and locally save them to a CSV file.
 
 On the home page, there is a dropdown list of available news sources, and a keyword field. Depending on the number of found articles, it may 20-30 seconds to load. This is because a time delay (0.5s) is needed in order to run NLP analysis on each of the articles without getting all the API requests rejected.
