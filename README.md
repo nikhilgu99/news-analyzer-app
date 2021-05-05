@@ -5,7 +5,7 @@ BU EC500 Final Project
 
 Flask web application to lookup keyword related news articles from various publishers and locally save them to a CSV file.
 
-On the home page, there is a dropdown list of available news sources, and a keyword field. Depending on the number of found articles, it may 20-30 seconds to load. This is because a time delay (0.5s) is needed in order to run NLP analysis on each of the articles without getting all the API requests rejected.
+On the home page, there is a dropdown list of available news sources, and a keyword field. By default, if no publisher is selected, it will query all publishers. Articles are sorted by most recent. Depending on the number of found articles, it may 20-30 seconds to load. This is because a time delay (0.5s) is needed in order to run NLP analysis on each of the articles without getting all the API requests rejected.
 
 *Home Page*
 
