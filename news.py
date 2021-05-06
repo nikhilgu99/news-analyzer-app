@@ -14,13 +14,16 @@ natural_language_understanding = NaturalLanguageUnderstandingV1(version='2020-08
 natural_language_understanding.set_service_url('https://api.us-east.natural-language-understanding.watson.cloud.ibm.com/instances/3528455f-6fa6-4e10-8eb8-1e0cdf7779e0')
 
 def getNews(publisher, keyword):
-    keyword = keyword.replace(" ", "%20") # Make it URL friendly
+    # URL PARAMETERS
+    url = "https://newsapi.org/v2/everything?"
 
-    url = ""
-    if publisher == "all":
-        url = "https://newsapi.org/v2/everything?q=" + keyword + "&language=en&sortBy=publishedAt&apiKey=8916674ee011411aae3f5d83992abd18"
-    else:
-        url = "https://newsapi.org/v2/everything?sources=" + publisher + "&q=" + keyword + "&language=en&sortBy=publishedAt&apiKey=8916674ee011411aae3f5d83992abd18"
+    keyword = keyword.replace(" ", "%20") # Make it URL friendly
+    url += "q=" + keyword
+
+    if publisher != "all":
+        url += "&sources=" + publisher
+
+    url += "&language=en&sortBy=publishedAt&apiKey=8916674ee011411aae3f5d83992abd18"
 
     # Get the returned json and pull the info we need
     jsonurl = urlopen(url) 
