@@ -18,9 +18,9 @@ def getNews(publisher, keyword):
 
     url = ""
     if publisher == "all":
-        url = "https://newsapi.org/v2/everything?q=" + keyword + "&sortBy=publishedAt&apiKey=8916674ee011411aae3f5d83992abd18"
+        url = "https://newsapi.org/v2/everything?q=" + keyword + "&language=en&sortBy=publishedAt&apiKey=8916674ee011411aae3f5d83992abd18"
     else:
-        url = "https://newsapi.org/v2/everything?sources=" + publisher + "&q=" + keyword + "&sortBy=publishedAt&apiKey=8916674ee011411aae3f5d83992abd18"
+        url = "https://newsapi.org/v2/everything?sources=" + publisher + "&q=" + keyword + "&language=en&sortBy=publishedAt&apiKey=8916674ee011411aae3f5d83992abd18"
 
     # Get the returned json and pull the info we need
     jsonurl = urlopen(url) 
