@@ -21,3 +21,7 @@ Under the table is the overall sentiment of the articles, and the options to exp
 *CSV File*
 
 <img alt="CSV File" src="/static/demo/csv.png">
+
+## Future Steps
+- Allow showing more results. The current is 20, max allowable by API is 100, however this would increase loading time by 5x and make table too long for readability. A possible solution for this is create pages with arrow buttons around the overall sentiment text to go through the 5 pages of potential articles.
+- Create a date option to search for articles before a certain date. This was implemented, but then we found NewsAPI only allows us to query back 1 month in time with a free account, so we removed it for now.
